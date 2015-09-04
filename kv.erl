@@ -76,7 +76,7 @@ delete(K, {node, L, KN, VN, R}) ->
       {node, delete(K, L), KN, VN, R};
      K == KN ->
       merge(L, R);
-     K>KN ->
+     K > KN ->
       {node, L, KN, VN, delete(K, R)}
   end.
 
@@ -84,10 +84,8 @@ merge(leaf, R) ->
   R;
 merge(L, leaf) ->
   L;
-merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) when LK < LV ->
-  {node, LL, LK, LV, {node, merge(RL, LR), RK, RV, RR}};
 merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) ->
-  {node, {node, LL, LK, LV, merge(LR, RL)}, RK, RV, RR}.
+  {node, LL, LK, LV, {node, merge(RL, LR), RK, RV, RR}}.
 
 tolist(leaf) ->
   [];
