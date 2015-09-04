@@ -3,12 +3,15 @@
 
 -module(kv).
 
+-ifdef(EQC).
 -compile({parse_transform,eqc_cover}).
+-endif.
 -compile(export_all).
 
 %% -- API functions ----------------------------------------------------------
 
 start() ->
+  catch kv ! stop,
   catch unregister(kv),
   register(kv, spawn_link(fun() -> server(leaf) end)).
 
@@ -34,11 +37,13 @@ server(T) ->
     %%   server(delete(K, T));
     {lookup, K, Pid} ->
       Pid ! lookup(K, T),
-      server(T)
-  after 5000 ->
+      server(T);
+    stop ->
+      ok
+  %% after 500000 ->
       %% Our server dies after 5 seconds of inactivity... just so we
       %% don't fill the memory with idle servers.
-      ok
+      %% ok
   end.
 
 insert(K, V, leaf) ->
