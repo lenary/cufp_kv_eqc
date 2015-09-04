@@ -24,9 +24,9 @@ lookup(K) ->
   kv ! {lookup, K, self()},
   receive Msg -> Msg end.
 
-%% delete(K) ->
-%%   kv ! {delete, K},
-%%   ok.
+delete(K) ->
+  kv ! {delete, K},
+  ok.
 
 %% -- Internal functions -----------------------------------------------------
 
@@ -34,8 +34,8 @@ server(T) ->
   receive
     {insert, K, V} ->
       server(insert(K, V, T));
-    %% {delete, K} ->
-    %%   server(delete(K, T));
+    {delete, K} ->
+      server(delete(K, T));
     {lookup, K, Pid} ->
       Pid ! lookup(K, T),
       server(T);
