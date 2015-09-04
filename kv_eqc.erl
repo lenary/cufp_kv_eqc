@@ -53,15 +53,15 @@ lookup_post(S, [Key], Res) ->
 %%   lists:keydelete(Key, 1, S).
 
 %% -- Property ---------------------------------------------------------------
-weight(_S, lookup) -> 2;
-weight(_S, _Cmd)   -> 1.
+%% weight(_S, lookup) -> 2;
+%% weight(_S, _Cmd)   -> 1.
 
 prop_kv() ->
   numtests(1000,
   ?FORALL(Cmds, commands(?MODULE),
   begin
     kv:start(),
-    {H, S, Res} = run_commands(?MODULE,Cmds),
+    {H, S, Res} = run_commands(?MODULE, Cmds),
     pretty_commands(?MODULE, Cmds, {H, S, Res},
       measure(length, length(Cmds),
         aggregate(command_names(Cmds),

@@ -3,7 +3,7 @@
 
 -module(kv).
 
--include_lib("eqc/include/eqc.hrl").
+%% -include_lib("eqc/include/eqc.hrl").
 
 -compile({parse_transform,eqc_cover}).
 -compile(export_all).
