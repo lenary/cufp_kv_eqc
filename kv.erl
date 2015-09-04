@@ -49,13 +49,13 @@ server(T) ->
 
 insert(K, V, leaf) ->
   {node, leaf, K, V, leaf};
-insert(K, V, {node, L, KN, _VN, R}) ->
+insert(K, V, {node, L, KN, VN, R}) ->
   if K < KN ->
-      insert(K, V, L);
+      {node, insert(K, V, L), KN, VN, R};
      K == KN ->
       {node, L, K, V, R};
      K > KN ->
-      insert(K, V, R)
+      {node, L, KN, VN, insert(K, V, R)}
   end.
 
 lookup(_, leaf) ->
