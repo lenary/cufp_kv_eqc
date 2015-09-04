@@ -45,14 +45,14 @@ lookup_post(S, [Key], Res) ->
   eq(Res, lists:keyfind(Key, 1, S)).
 
 %% --- Operation: delete ---
-%% delete_args(_S) ->
-%%   [key()].
+delete_args(_S) ->
+  [key()].
 
-%% delete(Key) ->
-%%   kv:delete(Key).
+delete(Key) ->
+  kv:delete(Key).
 
-%% delete_next(S, _Value, [Key]) ->
-%%   lists:keydelete(Key, 1, S).
+delete_next(S, _Value, [Key]) ->
+  lists:keydelete(Key, 1, S).
 
 %% -- Property ---------------------------------------------------------------
 weight(_S, lookup) -> 2;

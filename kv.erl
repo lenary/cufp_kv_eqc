@@ -69,20 +69,20 @@ lookup(K, {node, L, KN, VN, R}) ->
       lookup(K, R)
   end.
 
-%% delete(_K, leaf) ->
-%%   leaf;
-%% delete(K, {node, L, KN, VN, R}) ->
-%%   if K<KN ->
-%%       {node, delete(K, L), KN, VN, R};
-%%      K==KN ->
-%%       merge(L, R);
-%%      K>KN ->
-%%       {node, L, KN, VN, delete(K, R)}
-%%   end.
+delete(_K, leaf) ->
+  leaf;
+delete(K, {node, L, KN, VN, R}) ->
+  if K < KN ->
+      {node, delete(K, L), KN, VN, R};
+     K == KN ->
+      merge(L, R);
+     K>KN ->
+      {node, L, KN, VN, delete(K, R)}
+  end.
 
-%% merge(leaf, R) ->
-%%   R;
-%% merge(L, leaf) ->
-%%   L;
-%% merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) ->
-%%   {node, LL, LK, LV, {node, merge(RL, LR), RK, RV, RR}}.
+merge(leaf, R) ->
+  R;
+merge(L, leaf) ->
+  L;
+merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) ->
+  {node, LL, LK, LV, {node, merge(RL, LR), RK, RV, RR}}.
