@@ -55,8 +55,8 @@ lookup_post(S, [Key], Res) ->
 %%   lists:keydelete(Key, 1, S).
 
 %% -- Property ---------------------------------------------------------------
-%% weight(_S, lookup) -> 2;
-%% weight(_S, _Cmd)   -> 1.
+weight(_S, lookup) -> 2;
+weight(_S, _Cmd)   -> 1.
 
 prop_kv() ->
   numtests(1000,
