@@ -4,6 +4,7 @@
 -module(kv).
 
 -ifdef(EQC).
+-include_lib("eqc/include/eqc.hrl").
 -compile({parse_transform,eqc_cover}).
 -endif.
 -compile(export_all).
