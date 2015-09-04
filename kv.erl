@@ -88,3 +88,8 @@ merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) when LK < LV ->
   {node, LL, LK, LV, {node, merge(RL, LR), RK, RV, RR}};
 merge({node, LL, LK, LV, LR}, {node, RL, RK, RV, RR}) ->
   {node, {node, LL, LK, LV, merge(LR, RL)}, RK, RV, RR}.
+
+tolist(leaf) ->
+  [];
+tolist({node, L, K, V, R}) ->
+  tolist(L) ++ [{K,V}] ++ tolist(R).
